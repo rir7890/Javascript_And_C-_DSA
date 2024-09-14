@@ -1,0 +1,25 @@
+const arr=[11,9,12,7,3]
+
+function indexSort(arr,start,end){
+  const pivot=arr[end];
+  let j=start-1;
+  for(let i=start;i<=end;i++){
+    if(arr[i]<pivot){
+      j+=1;
+      [arr[j],arr[i]]=[arr[i],arr[j]];
+    }
+  }
+  [arr[j+1],arr[end]]=[arr[end],arr[j+1]];
+  return j+1;
+}
+
+function QuickSort(arr,start,end){
+  if(start>=end) return;
+  let p=indexSort(arr,start,end);
+  QuickSort(arr,start,p-1);
+  QuickSort(arr,p+1,end);
+}
+
+QuickSort(arr,0,arr.length-1);
+
+console.log(arr);
