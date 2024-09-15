@@ -1,0 +1,55 @@
+
+
+function merge(arr,start,mid,end){
+  
+  let n1=mid-start+1;
+  let n2= end-mid;
+
+  let L=new Array(n1);
+  let R=new Array(n2);
+
+  for(let i=0;i<n1;i++){
+    L[i]=arr[start+i];
+  }
+
+  for(let j=0;j<n2;j++){
+    R[j]=arr[mid+j+1];
+  }
+
+  let i=0,j=0;
+  let k=start;
+
+  while(i<n1 && j<n2){
+    if(L[i]>=R[j]){
+      arr[k]=R[j];
+      j+=1;k+=1;
+    }else{
+      arr[k]=L[i];
+      i+=1;k+=1;
+    }
+  }
+
+  while(i<n1){
+    arr[k]=L[i];
+    i+=1;k+=1;
+  }
+
+  while(j<n2){
+    arr[k]=R[j];
+    j+=1;k+=1;
+  }
+  
+}
+
+function MergeSort(arr,start,end){
+  if(start>=end) return;
+  let mid=Math.floor(start+(end-start)/2);
+  MergeSort(arr,start,mid);
+  MergeSort(arr,mid+1,end);
+  merge(arr,start,mid,end);
+}
+
+const arr=[12,8,9,3,11,5,4]
+MergeSort(arr,0,arr.length-1);
+
+console.log(arr)
