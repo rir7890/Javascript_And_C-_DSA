@@ -1,0 +1,98 @@
+class Node{
+  constructor(data){
+    this.data=data;
+    this.Node=null
+  }
+}
+
+//initial single Linked list
+function startLinkedList(arr,Node){
+  let startNode = new Node(arr[0]);
+  const snode=startNode;
+  for(let i=1;i<arr.length;i++){
+      const newNode=new Node(arr[i]);
+      startNode.Node=newNode;
+      startNode=newNode;
+  }
+  return snode;
+}
+
+//searching the data
+function searchData(Node,key){
+  let sNode=Node;
+  while(sNode){
+    if(sNode.data===key){
+      return true;
+    }else{
+      sNode=sNode.Node;
+    }
+  }
+  return false;
+}
+
+//taverse the Single linked list
+function traverseLinkedList(Node){
+  let tNode=Node;
+  while(tNode){
+    console.log(tNode.data);
+    tNode=tNode.Node;
+  }
+  return;
+}
+
+//length of Linked list
+function lengthList(Node){
+  let tNode=Node;
+  let count=1;
+  while(tNode){
+    count++;
+    tNode=tNode.Node;
+  }
+  return count;
+}
+
+//insertion in linked list
+function insertAtBeginList(hNode,key){
+  let nNode=new Node(key);
+  nNode.Node=hNode;
+  hNode=nNode;
+  return nNode;
+}
+
+//Insert at the end
+function insertAtLastList(hNode,key){
+  let nNode=new Node(key);
+  let eNode=hNode;
+  while(eNode.Node){
+    eNode=eNode.Node;
+  }
+  eNode.Node=nNode;
+  eNode=nNode;
+  return hNode;
+}
+
+//insert at a specific position
+function insertIndex(hNode,index,key){
+  let nNode=new Node(key);
+  if(index===0){
+    nNode.Node=hNode;
+    hNode=nNode;
+    return hNode;
+  }else{
+    let i=1;
+    let tNode=hNode;
+    while(tNode.Node && i!==index){
+      i++;
+      tNode=tNode.Node;
+    }
+    nNode.Node=tNode.Node;
+    tNode.Node=nNode;
+  }
+  return hNode;
+}
+
+const arr=[10,20,100,11,40,32,200]
+let nodeData = startLinkedList(arr,Node)
+// traverseLinkedList(nodeData);
+nodeData=insertIndex(nodeData,2,25);
+traverseLinkedList(nodeData);
